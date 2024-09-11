@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class KasirWarungBeras {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        try {
+            // Memasukkan data pembelian
+            System.out.print("Masukkan jumlah beras yang dibeli (kg): ");
+            String jumlahBerasStr = input.nextLine();
+            double jumlahBeras = Double.parseDouble(jumlahBerasStr);
+
+            System.out.print("Masukkan harga beras per kg: ");
+            String hargaPerKgStr = input.nextLine();
+            double hargaPerKg = Double.parseDouble(hargaPerKgStr);
+
+            // Menghitung total harga sebelum diskon
+            double totalHarga = jumlahBeras * hargaPerKg;
+            System.out.println(String.format("Total harga sebelum diskon: Rp%.2f", totalHarga));
+
+            // Menghitung diskon 5%
+            double diskon = totalHarga * 0.05;
+            double hargaSetelahDiskon = totalHarga - diskon;
+            System.out.println(String.format("Total harga setelah diskon 5%%: Rp%.2f", hargaSetelahDiskon));
+
+            // Memasukkan jumlah uang yang diterima dari pembeli
+            System.out.print("Masukkan jumlah uang yang diterima: Rp");
+            String uangDiterimaStr = input.nextLine();
+            double uangDiterima = Double.parseDouble(uangDiterimaStr);
+
+            // Menghitung kembalian
+            double kembalian = uangDiterima - hargaSetelahDiskon;
+
+            // Menampilkan hasil
+            if (kembalian < 0) {
+                System.out.println(String.format("Uang yang diterima kurang! Anda kekurangan Rp%.2f", -kembalian));
+            } else {
+                System.out.println(String.format("Uang kembalian: Rp%.2f", kembalian));
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Input tidak valid, pastikan Anda memasukkan angka dengan benar.");
+        } finally {
+            input.close();
+        }
+    }
+}
